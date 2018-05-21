@@ -13,6 +13,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.Point;
+import javax.swing.JButton;
 
 /**
  *
@@ -228,41 +230,50 @@ public class Iom4tvLayout extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Iom4tvLayout().setVisible(true);
-            }
-        });
-
-        
-        
-//        MouseController cursor = new MouseController();
-//		KeyboardSimulation key = new KeyboardSimulation();
-//
-//		for(;;)
-//		{
-//			Point anterior = cursor.getPosition();
-//			Point atual = cursor.getPosition();
-//				
-//			if (atual.x > anterior.x)
-//				key.move(key.RIGHT);
-//			else if(atual.x < anterior.x)
-//				key.move(key.LEFT);
-//			cursor.centerCursor();		
-//		}
+        //java.awt.EventQueue.invokeLater(new Runnable() {
+        //    public void run() {
+               new Iom4tvLayout().setVisible(true);
+               int i = 0;
+               javax.swing.JButton[] buttons = new JButton[5];
+               buttons[0] = upButton;
+               buttons[1] = rightButton;
+               buttons[2] = downButton;
+               buttons[3] = leftButton;
+               buttons[4] = leftButton;
+               MouseController cursor = new MouseController();
+               buttons[0].setFocusable(true);
+               buttons[0].requestFocus(true);
+               
+            //}
+        //});
+               for(;;)
+               {
+                    Point anterior = cursor.getPosition();
+                    Point atual = cursor.getPosition();
+                    if (atual.x > anterior.x + 2)
+                        i++;
+                    else if(atual.x < anterior.x - 2)
+                       i--;
+                        //cursor.centerCursor();	
+                    if(i == 4)
+                        i = 0;
+                    else if(i == -1)
+                        i = 3;
+                    buttons[i].requestFocus();
+                }
+                
         
         
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField canalTextField;
     private javax.swing.JButton changeChannelButton;
-    private javax.swing.JButton downButton;
+    private static javax.swing.JButton downButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton leftButton;
+    private static javax.swing.JButton leftButton;
     private javax.swing.JTextArea mainTextArea;
-    private javax.swing.JButton okButton;
-    private javax.swing.JButton rightButton;
-    private javax.swing.JButton upButton;
+    private static javax.swing.JButton okButton;
+    private static javax.swing.JButton rightButton;
+    private static javax.swing.JButton upButton;
     // End of variables declaration//GEN-END:variables
 }
