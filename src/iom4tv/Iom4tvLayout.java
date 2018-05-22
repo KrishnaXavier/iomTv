@@ -234,6 +234,7 @@ public class Iom4tvLayout extends javax.swing.JFrame {
         //    public void run() {
                new Iom4tvLayout().setVisible(true);
                int i = 0;
+               boolean on = true;
                javax.swing.JButton[] buttons = {okButton, upButton, rightButton, downButton, leftButton};
                MouseController cursor = new MouseController();
                buttons[0].setFocusable(true);
@@ -244,18 +245,26 @@ public class Iom4tvLayout extends javax.swing.JFrame {
                {
                     Point anterior = cursor.getPosition();
                     Point atual = cursor.getPosition();
-                    if (atual.x > anterior.x + 3)
-                        i++;
-                    else if(atual.x < anterior.x - 3)
-                        i--;
-                    else if(atual.y < anterior.y - 2)
-                        buttons[i].doClick(); 
-                        //cursor.centerCursor();	
-                    if(i == 5)
-                        i = 0;
-                    else if(i == -1)
-                        i = 4;
-                    buttons[i].requestFocus();
+                    if(atual.y < anterior.y - 3){
+                        if(on == true)
+                            on = false;
+                        else
+                            on = true;
+                    }
+                    if(on == true){
+                        if (atual.x > anterior.x + 3)
+                            i++;
+                        else if(atual.x < anterior.x - 3)
+                            i--;
+                        else if(atual.y > anterior.y + 3)
+                            buttons[i].doClick(); 
+                            //cursor.centerCursor();       
+                        if(i == 5)
+                            i = 0;
+                        else if(i == -1)
+                            i = 4;
+                        buttons[i].requestFocus();
+                    }
                 }
                 
         
